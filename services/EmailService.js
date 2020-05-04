@@ -1,7 +1,6 @@
 const sgMail = require('@sendgrid/mail');
-const { config } = require('../config');
 
-const API_KEY = process.env.API_KEY || config.API_KEY;
+const API_KEY = process.env.API_KEY;
 
 class EmailService {
   constructor() {
@@ -12,7 +11,7 @@ class EmailService {
   /**
    *
    * @param {*} msg an object with email configuration
-   * @returns null when email sent successfull,
+   * @returns Promise with null when email sent successfull,
    * or error object when email failed to sent
    */
   send(msg) {
