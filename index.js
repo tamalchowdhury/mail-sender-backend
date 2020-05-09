@@ -61,7 +61,10 @@ app.post('/sendmail', async function (req, res) {
   if (mailres) {
     res.status(mailres.code).json(mailres).end();
   } else {
-    res.status(200).json({ info: 'Mail sent successfully' }).end();
+    res
+      .status(200)
+      .json({ info: `Mail sent successfully to ${to}` })
+      .end();
   }
 });
 
