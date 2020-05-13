@@ -13,6 +13,16 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// CORS, enabling the host and content type
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'http://forms.wisdomoftheheartinc.com'
+  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 const emailService = new EmailService();
 
 app.get('/', function (req, res) {
@@ -23,11 +33,6 @@ app.get('/', function (req, res) {
  * The sendmail POST controller
  */
 app.post('/sendmail', async function (req, res) {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'http://forms.wisdomoftheheartinc.com/'
-  );
-
   const { to, subject, doc } = req.body;
 
   if (!to || !subject || !doc) {
