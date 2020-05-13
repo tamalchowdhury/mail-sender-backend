@@ -23,6 +23,11 @@ app.get('/', function (req, res) {
  * The sendmail POST controller
  */
 app.post('/sendmail', async function (req, res) {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'http://forms.wisdomoftheheartinc.com/'
+  );
+
   const { to, subject, doc } = req.body;
 
   if (!to || !subject || !doc) {
